@@ -66,7 +66,7 @@ export const PRODUCTS: Product[] = [
     usage: "تناولي علكتين يومياً مع أو بعد الإفطار لأفضل امتصاص.",
     warnings: [],
     images: {
-      main: "/images/placeholders/lutein-main.webp",
+      main: "/images/products/lutein-eye-glow-gummies.webp",
       routine: "/images/placeholders/lutein-routine.webp",
     },
     offers: [
@@ -151,7 +151,7 @@ export const PRODUCTS: Product[] = [
     usage: "تناولي علكتين يومياً، يفضل بعد الإفطار للحصول على أفضل امتصاص.",
     warnings: [],
     images: {
-      main: "/images/placeholders/collagen-glow-main.webp",
+      main: "/images/products/collagen-glow-gummies.webp",
       routine: "/images/placeholders/collagen-glow-routine.webp",
     },
     offers: [
@@ -237,7 +237,7 @@ export const PRODUCTS: Product[] = [
     usage: "تناولي علكتين يومياً في أي وقت من اليوم، واستمتعي بانتعاش وثقة تدوم.",
     warnings: [],
     images: {
-      main: "/images/placeholders/chlorophyll-main.webp",
+      main: "/images/products/chlorophyll-gummies.webp",
       routine: "/images/placeholders/chlorophyll-routine.webp",
     },
     offers: [

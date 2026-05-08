@@ -115,16 +115,14 @@ export function ProductPageClient({ product }: Props) {
           <div className="grid md:grid-cols-2 gap-10 items-start">
             {/* Image (RTL: order-1 md:order-2 => Image on the Right) */}
             <div className="md:sticky md:top-24 order-1 md:order-2">
-              <div className="aspect-square bg-gradient-to-br from-[#E8F0ED] to-[#F7FAF9] rounded-3xl flex items-center justify-center shadow-md border border-[#D5E0DC]/50 relative overflow-hidden">
-                <div className="text-center p-8 z-10">
-                  <p className="text-6xl mb-4">✨</p>
-                  <p className="text-[#0B6B5C] font-bold text-lg mb-1">
-                    {product.shortNameAr}
-                  </p>
-                  <p className="text-[#1A2332] text-sm font-bold bg-white px-3 py-1 rounded-full border border-[#D5E0DC] inline-block">
-                    60 علكة · شهر كامل
-                  </p>
-                </div>
+              <div className="aspect-square bg-white rounded-3xl flex items-center justify-center shadow-md border border-[#D5E0DC]/50 relative overflow-hidden">
+                <img
+                  src={product.images.main}
+                  alt={product.nameAr}
+                  fetchPriority="high"
+                  decoding="async"
+                  className="h-full w-full object-cover"
+                />
                 <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm rounded-full px-3 py-1.5 text-xs font-bold text-[#0B6B5C] flex items-center gap-1 shadow-sm">
                   <ShieldCheck size={14} />
                   ضمان 30 يوم
@@ -396,38 +394,44 @@ export function ProductPageClient({ product }: Props) {
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {crossSells.map((crossProduct) => (
-                <div key={crossProduct.id} className="bg-white border-2 border-[#D5E0DC] rounded-3xl p-6 hover:border-[#0B6B5C]/50 transition-colors shadow-sm">
-                  <div className="flex items-center justify-between mb-4">
-                    <div className="flex items-center gap-3">
-                      <div className="w-12 h-12 bg-[#F7FAF9] rounded-xl flex items-center justify-center text-2xl">
-                        ✨
-                      </div>
+                <div key={crossProduct.id} className="bg-white border-2 border-[#D5E0DC] rounded-3xl overflow-hidden hover:border-[#0B6B5C]/50 transition-colors shadow-sm">
+                  <div className="relative h-56 bg-white overflow-hidden">
+                    <img
+                      src={crossProduct.images.main}
+                      alt={crossProduct.shortNameAr}
+                      loading="lazy"
+                      decoding="async"
+                      className="h-full w-full object-cover"
+                    />
+                  </div>
+                  <div className="p-6">
+                    <div className="flex items-center justify-between mb-4">
                       <div>
                         <h3 className="font-bold text-[#1A2332] text-lg">{crossProduct.shortNameAr}</h3>
                         <p className="text-sm text-[#5A6A72]">+ {product.shortNameAr}</p>
                       </div>
+                      <div className="text-left">
+                        <p className="font-bold text-xl text-[#0B6B5C]">349 ريال</p>
+                        <p className="text-xs text-[#5A6A72] line-through">بدل 398 ريال</p>
+                        <p className="text-[10px] text-[#2D8B6F] font-bold mt-0.5">
+                          وفّري 49 ريال
+                        </p>
+                      </div>
                     </div>
-                    <div className="text-left">
-                      <p className="font-bold text-xl text-[#0B6B5C]">349 ريال</p>
-                      <p className="text-xs text-[#5A6A72] line-through">بدل 398 ريال</p>
-                      <p className="text-[10px] text-[#2D8B6F] font-bold mt-0.5">
-                        وفّري 49 ريال
-                      </p>
-                    </div>
+                    
+                    <p className="text-[15px] text-[#5A6A72] mb-6 leading-relaxed line-clamp-2">
+                      {crossProduct.subheadline}
+                    </p>
+                    
+                    <Button
+                      variant="primary"
+                      fullWidth
+                      onClick={() => handleAddBundle(crossProduct)}
+                      className="shadow-md shadow-[#0B6B5C]/10"
+                    >
+                      أضيفي الباقة للسلة
+                    </Button>
                   </div>
-                  
-                  <p className="text-[15px] text-[#5A6A72] mb-6 leading-relaxed line-clamp-2">
-                    {crossProduct.subheadline}
-                  </p>
-                  
-                  <Button
-                    variant="primary"
-                    fullWidth
-                    onClick={() => handleAddBundle(crossProduct)}
-                    className="shadow-md shadow-[#0B6B5C]/10"
-                  >
-                    أضيفي الباقة للسلة
-                  </Button>
                 </div>
               ))}
             </div>
