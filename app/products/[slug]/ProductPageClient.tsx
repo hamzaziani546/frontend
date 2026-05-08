@@ -17,6 +17,31 @@ interface Props {
   product: Product;
 }
 
+function ProductSectionImage({
+  src,
+  alt,
+  badge,
+}: {
+  src: string;
+  alt: string;
+  badge: string;
+}) {
+  return (
+    <div className="aspect-video bg-white rounded-3xl shadow-sm border border-[#D5E0DC] relative overflow-hidden">
+      <img
+        src={src}
+        alt={alt}
+        loading="lazy"
+        decoding="async"
+        className="h-full w-full object-cover"
+      />
+      <div className="absolute bottom-4 right-4 bg-white/90 backdrop-blur-sm rounded-full px-4 py-1.5 text-xs font-bold text-[#0B6B5C] shadow-sm">
+        {badge}
+      </div>
+    </div>
+  );
+}
+
 export function ProductPageClient({ product }: Props) {
   const [selectedOfferId, setSelectedOfferId] = useState("three");
   const { addItem, openCart } = useCartStore();
@@ -24,6 +49,12 @@ export function ProductPageClient({ product }: Props) {
   const [showStickyCta, setShowStickyCta] = useState(false);
 
   const selectedOffer = product.offers.find((o) => o.id === selectedOfferId)!;
+  const pdpImages = {
+    hero: product.images.pdpHero ?? product.images.main,
+    ingredients: product.images.pdpIngredients ?? product.images.routine,
+    routine: product.images.pdpRoutine ?? product.images.routine,
+    science: product.images.pdpScience ?? product.images.lifestyle ?? product.images.routine,
+  };
 
   useEffect(() => {
     trackViewContent(product.id, product.offers[0].priceSar);
@@ -117,7 +148,7 @@ export function ProductPageClient({ product }: Props) {
             <div className="md:sticky md:top-24 order-1 md:order-2">
               <div className="aspect-square bg-white rounded-3xl flex items-center justify-center shadow-md border border-[#D5E0DC]/50 relative overflow-hidden">
                 <img
-                  src={product.images.main}
+                  src={pdpImages.hero}
                   alt={product.nameAr}
                   fetchPriority="high"
                   decoding="async"
@@ -223,16 +254,13 @@ export function ProductPageClient({ product }: Props) {
       <section className="py-12 md:py-16 bg-[#F7FAF9]">
         <div className="container-padded">
           <div className="grid md:grid-cols-2 gap-10 items-center">
-            {/* Image placeholder (RTL: order-1 md:order-1 => Image on the Left) */}
+            {/* Image (RTL: order-1 md:order-1 => Image on the Left) */}
             <div className="order-1 md:order-1">
-              <div className="aspect-video bg-gradient-to-br from-[#E8F0ED] to-[#F7FAF9] rounded-3xl flex items-center justify-center shadow-inner border border-white">
-                <div className="text-center px-6">
-                  <p className="text-5xl mb-3">🌿</p>
-                  <p className="text-[#0B6B5C] text-sm font-bold bg-white px-4 py-1.5 rounded-full shadow-sm inline-block">
-                    مكونات بحثية بجرعات واضحة
-                  </p>
-                </div>
-              </div>
+              <ProductSectionImage
+                src={pdpImages.ingredients}
+                alt={`مكونات ${product.shortNameAr}`}
+                badge="مكونات بحثية بجرعات واضحة"
+              />
             </div>
             {/* Text (RTL: order-2 md:order-2 => Text on the Right) */}
             <div className="order-2 md:order-2">
@@ -292,16 +320,13 @@ export function ProductPageClient({ product }: Props) {
                 </div>
               ))}
             </div>
-            {/* Image placeholder (RTL: order-1 md:order-2 => Image on the Right) */}
+            {/* Image (RTL: order-1 md:order-2 => Image on the Right) */}
             <div className="order-1 md:order-2">
-              <div className="aspect-video bg-gradient-to-br from-[#F7FAF9] to-[#E8F0ED] rounded-3xl flex items-center justify-center shadow-inner border border-white">
-                <div className="text-center px-6">
-                  <p className="text-5xl mb-3">💧</p>
-                  <p className="text-[#0B6B5C] text-sm font-bold bg-white px-4 py-1.5 rounded-full shadow-sm inline-block">
-                    علكتين يومياً · بدون حبوب مرة
-                  </p>
-                </div>
-              </div>
+              <ProductSectionImage
+                src={pdpImages.routine}
+                alt={`روتين استخدام ${product.shortNameAr}`}
+                badge="علكتين يومياً · بدون حبوب مرة"
+              />
             </div>
           </div>
         </div>
@@ -311,16 +336,13 @@ export function ProductPageClient({ product }: Props) {
       <section className="py-12 md:py-20 bg-[#F7FAF9]">
         <div className="container-padded">
           <div className="grid md:grid-cols-2 gap-10 items-center">
-            {/* Image placeholder (RTL: order-1 md:order-1 => Image on the Left) */}
+            {/* Image (RTL: order-1 md:order-1 => Image on the Left) */}
             <div className="order-1 md:order-1">
-              <div className="aspect-video bg-gradient-to-br from-white to-[#F7FAF9] rounded-3xl flex items-center justify-center shadow-sm border border-[#D5E0DC]">
-                <div className="text-center px-6">
-                  <p className="text-5xl mb-3">🔬</p>
-                  <p className="text-[#0B6B5C] text-sm font-bold bg-[#E8F0ED] px-4 py-1.5 rounded-full inline-block">
-                    مصرّحة SFDA · اختبار جودة لكل دفعة
-                  </p>
-                </div>
-              </div>
+              <ProductSectionImage
+                src={pdpImages.science}
+                alt={`جودة وموثوقية ${product.shortNameAr}`}
+                badge="مصرّحة SFDA · اختبار جودة لكل دفعة"
+              />
             </div>
             {/* Text (RTL: order-2 md:order-2 => Text on the Right) */}
             <div className="order-2 md:order-2">
