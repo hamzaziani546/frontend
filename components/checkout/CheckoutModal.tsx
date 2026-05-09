@@ -130,6 +130,20 @@ export function CheckoutModal({ isOpen, onClose }: CheckoutModalProps) {
       // Fire browser purchase pixels using backend event_id
       trackPurchase(currentItems, currentTotal, resp.event_id);
 
+      // Persist order snapshot so the thank-you page can show order details
+      try {
+        sessionStorage.setItem(
+          "lamis_last_order",
+          JSON.stringify({
+            items: currentItems,
+            total: currentTotal,
+            orderNumber: resp.order_number,
+          })
+        );
+      } catch {
+        // sessionStorage unavailable — graceful degradation
+      }
+
       clearCart();
       onClose();
       router.push(`/thank-you/${resp.order_number}`);
