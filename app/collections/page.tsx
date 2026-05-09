@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { Star, ShieldCheck, CreditCard, Truck, ArrowLeft, BadgeCheck } from "lucide-react";
+import { Star, ShieldCheck, CreditCard, Truck, BadgeCheck } from "lucide-react";
 import { PRODUCTS } from "@/config/products";
 import { ProductCard } from "@/components/product/ProductCard";
 import { ReviewCard, PRODUCT_REVIEWS } from "@/components/product/ReviewCard";
@@ -11,33 +11,6 @@ export const metadata: Metadata = {
     "اختاري من روتين علكات لاميس: علكات اللوتين لإشراقة العين، علكات الكولاجين بفيتامين C والزنك، وعلكات الكلوروفيل للانتعاش. الدفع عند الاستلام.",
 };
 
-const PAIN_POINTS = [
-  {
-    emoji: "👁️",
-    pain: "هالات سوداء وتعب العين بعد يوم طويل",
-    result: "نظرة مشرقة بدون كونسيلر",
-    productId: "lutein-eye-glow-gummies",
-    bg: "bg-gradient-to-br from-[#E8F5F1] to-[#F7FAF9]",
-    border: "border-[#C5D9D3] hover:border-[#0B6B5C]/40",
-  },
-  {
-    emoji: "✨",
-    pain: "بشرة فقدت توهجها أو شعر يتساقط ويضعف",
-    result: "بشرة مشدودة وشعر أكثف",
-    productId: "collagen-glow-gummies",
-    bg: "bg-gradient-to-br from-[#FEF9EF] to-[#FFFBF5]",
-    border: "border-[#E8D9B5] hover:border-[#C9A45C]/60",
-    badge: "الأكثر مبيعاً",
-  },
-  {
-    emoji: "🌿",
-    pain: "رائحة الجسم والإحساس بعدم الانتعاش من الداخل",
-    result: "انتعاش وثقة تدوم ٢٤ ساعة",
-    productId: "chlorophyll-gummies",
-    bg: "bg-gradient-to-br from-[#F0FDF4] to-[#F7FAF9]",
-    border: "border-[#BBF7D0] hover:border-[#2D8B6F]/40",
-  },
-];
 
 export default function CollectionsPage() {
   return (
@@ -107,55 +80,6 @@ export default function CollectionsPage() {
         </div>
       </section>
 
-      {/* ── PAIN POINT SELECTOR (NEW) ─────────────────────── */}
-      <section className="py-12 md:py-16 bg-white">
-        <div className="container-padded">
-          <div className="text-center mb-8">
-            <h2 className="text-2xl sm:text-3xl font-bold text-[#1A2332] mb-2">
-              ايش اللي تعانين منه؟
-            </h2>
-            <p className="text-[#5A6A72]">اختاري الاحتياج — وسنريكِ المنتج المناسب لكِ</p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-            {PAIN_POINTS.map((pp) => {
-              const product = PRODUCTS.find((p) => p.id === pp.productId)!;
-              return (
-                <Link
-                  key={pp.productId}
-                  href={`/products/${product.slug}`}
-                  className={`group ${pp.bg} border-2 ${pp.border} rounded-3xl p-6 relative transition-all hover:shadow-lg`}
-                >
-                  {pp.badge && (
-                    <span className="absolute -top-3 right-6 bg-[#C9A45C] text-white text-[10px] font-bold px-3 py-1 rounded-full shadow-sm">
-                      {pp.badge}
-                    </span>
-                  )}
-
-                  <div className="text-4xl mb-4">{pp.emoji}</div>
-
-                  <p className="text-[11px] font-bold text-[#5A6A72] uppercase tracking-wider mb-2">
-                    المشكلة
-                  </p>
-                  <p className="text-base font-bold text-[#1A2332] mb-4 leading-snug">
-                    {pp.pain}
-                  </p>
-
-                  <div className="flex items-center gap-1.5 text-xs text-[#0B6B5C] font-bold bg-white/70 rounded-full px-3 py-1.5 w-fit mb-4">
-                    <span>✓</span>
-                    <span>{pp.result}</span>
-                  </div>
-
-                  <div className="flex items-center gap-1.5 text-[#0B6B5C] text-sm font-bold group-hover:gap-3 transition-all">
-                    <span>{product.shortNameAr}</span>
-                    <ArrowLeft size={15} aria-hidden />
-                  </div>
-                </Link>
-              );
-            })}
-          </div>
-        </div>
-      </section>
 
       {/* ── PRODUCTS GRID ─────────────────────────────────── */}
       <section className="py-12 md:py-16 bg-[#F7FAF9]">
