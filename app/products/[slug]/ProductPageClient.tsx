@@ -1,9 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
-import Link from "next/link";
 import {
-  ChevronRight,
   CheckCircle,
   ShieldCheck,
   ArrowLeft,
@@ -154,16 +152,6 @@ export function ProductPageClient({ product }: Props) {
   return (
     <div dir="rtl">
 
-      {/* ── BREADCRUMB ─────────────────────────────────── */}
-      <div className="bg-white border-b border-[#D5E0DC]">
-        <div className="container-padded py-3 flex items-center gap-2 text-sm text-[#5A6A72]">
-          <Link href="/" className="hover:text-[#0B6B5C] transition-colors">الرئيسية</Link>
-          <ChevronRight size={14} aria-hidden />
-          <Link href="/collections" className="hover:text-[#0B6B5C] transition-colors">المنتجات</Link>
-          <ChevronRight size={14} aria-hidden />
-          <span className="text-[#1A2332] font-medium">{product.shortNameAr}</span>
-        </div>
-      </div>
 
       {/* ── HERO ───────────────────────────────────────── */}
       <section className="py-10 md:py-16 bg-[#F7FAF9]">
