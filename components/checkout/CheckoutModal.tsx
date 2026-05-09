@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { useRouter } from "next/navigation";
-import { X, ShieldCheck, CreditCard, Truck, BadgeCheck, Package } from "lucide-react";
+import { X, ShieldCheck, CreditCard, Truck, BadgeCheck, Package, MessageCircle } from "lucide-react";
 import { useCartStore } from "@/store/cart-store";
 import { normalizeKsaPhone, isValidKsaPhone } from "@/lib/phone";
 import { createOrder, getAttribution } from "@/lib/api";
@@ -252,19 +252,21 @@ export function CheckoutModal({ isOpen, onClose }: CheckoutModalProps) {
               </div>
             </div>
 
-            {/* Trust badges */}
-            <div className="grid grid-cols-3 gap-2 mb-5">
+            {/* Trust strip — 5 items */}
+            <div className="flex flex-wrap gap-2 mb-5">
               {[
-                { icon: CreditCard, label: "الدفع عند\nالاستلام" },
-                { icon: ShieldCheck, label: "ضمان ذهبي\n٣٠ يوم" },
-                { icon: BadgeCheck, label: "مصرح\nSFDA" },
-              ].map(({ icon: Icon, label }) => (
+                { icon: CreditCard,    text: "الدفع عند الاستلام" },
+                { icon: ShieldCheck,   text: "ضمان ٣٠ يوم" },
+                { icon: BadgeCheck,    text: "مصرح SFDA" },
+                { icon: Truck,         text: "شحن داخل السعودية" },
+                { icon: MessageCircle, text: "دعم واتساب" },
+              ].map(({ icon: Icon, text }) => (
                 <div
-                  key={label}
-                  className="flex flex-col items-center text-center bg-[#F7FAF9] border border-[#D5E0DC] rounded-xl p-2.5 gap-1"
+                  key={text}
+                  className="flex items-center gap-1.5 bg-[#F7FAF9] border border-[#D5E0DC] rounded-full px-3 py-1.5"
                 >
-                  <Icon size={16} className="text-[#0B6B5C]" aria-hidden />
-                  <p className="text-[10px] font-bold text-[#1A2332] leading-tight whitespace-pre-line">{label}</p>
+                  <Icon size={13} className="text-[#0B6B5C] shrink-0" aria-hidden />
+                  <span className="text-[11px] font-bold text-[#1A2332] whitespace-nowrap">{text}</span>
                 </div>
               ))}
             </div>
